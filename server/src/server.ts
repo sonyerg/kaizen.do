@@ -1,14 +1,15 @@
-import express from "express";
+import mongoose from "mongoose";
 
-const app = express();
+import app from "./app";
 
-const port = 5000;
+const port = process.env.PORT;
 
-app.get("/", (req, res, next) => {
-  res.send("hello world");
-  next();
-});
-
-app.listen(port, () => {
-  console.log("Server running on port: " + port);
-});
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to Mongo DB!");
+    app.listen(port, () => {
+      console.log("Server running on port: " + port);
+    });
+  })
+  .catch(console.error);
