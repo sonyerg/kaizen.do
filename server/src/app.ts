@@ -6,7 +6,11 @@ import taskRoute from "./routes/task";
 const app = express();
 
 app.use(express.json());
-app.use(taskRoute);
+app.use("/api/tasks", taskRoute);
+
+app.use((req, res, next) => {
+  next(Error("Endpoint not found"));
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
