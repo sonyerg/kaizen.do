@@ -2,6 +2,11 @@ import { InferSchemaType, model, Schema } from "mongoose";
 
 const taskSchema = new Schema(
   {
+    projectId: {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -10,14 +15,10 @@ const taskSchema = new Schema(
       type: String,
     },
     status: {
-      type: String,
-      default: "To Do",
+      type: Schema.Types.ObjectId,
+      ref: "Column",
+      required: true,
     },
-    // status: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Column",
-    //   required: true,
-    // },
     // reporter: {
     //   type: Schema.Types.ObjectId,
     //   ref: "User",
